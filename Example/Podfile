@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AlamofireURLRequestConfigurable_Example' do
+  pod 'AlamofireURLRequestConfigurable', :path => '../'
+
+  target 'AlamofireURLRequestConfigurable_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
