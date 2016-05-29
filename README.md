@@ -177,7 +177,7 @@ enum Router: URLRequestConfigurable {
         case .Search(let query, let page) where page > 1:
             return (
                 method: .GET,
-                URLString: "\(Router.baseURLString)/games",
+                URLString: "\(Router.baseURLString)/search",
                 parameters: ["q": query, "offset": Router.perPage * page],
                 encoding: .URL,
                 headers: nil
@@ -185,7 +185,7 @@ enum Router: URLRequestConfigurable {
         case .Search(let query, _):
             return (
                 method: .GET,
-                URLString: "\(Router.baseURLString)/games",
+                URLString: "\(Router.baseURLString)/search",
                 parameters: ["q": query],
                 encoding: .URL,
                 headers: nil
