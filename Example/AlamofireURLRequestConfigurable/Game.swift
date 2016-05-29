@@ -26,18 +26,19 @@ enum GameRouter: URLRequestConfigurable {
                 method: .GET,
                 URLString: APIConfiguration.URLString("/games"),
                 parameters: APIConfiguration.parameters(
-                    ["testKey": "testValue"]
+                    ["field_list": "id,name",
+                    "limit": 10]
                 ),
                 encoding: .URL,
-                headers: ["X-Custom-Header": "custom header value"]
+                headers: APIConfiguration.headers
             )
-        case .AddNew(let name, let description):
+        case .AddNew(let name, let description): // this call does not exist - it's only an example
             return (
                 method: .POST,
-                URLString: "http://www.example.com/getGames/",
+                URLString: APIConfiguration.URLString("/games/add"),
                 parameters: ["name": name, "description": description],
                 encoding: .JSON,
-                headers: ["X-Custom-Header": "custom header value"]
+                headers: APIConfiguration.headers
             )
         }
     }

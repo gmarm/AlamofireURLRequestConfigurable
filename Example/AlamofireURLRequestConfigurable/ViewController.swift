@@ -19,7 +19,12 @@ class ViewController: UIViewController {
         Alamofire.Manager.sharedInstance.request(GameRouter.GetAll())
         .validate()
         .responseJSON { response in
-            print(response)
+            switch response.result {
+            case .Success:
+                print("Validation Successful")
+            case .Failure(let error):
+                print(error)
+            }
         }
     }
 }
