@@ -10,7 +10,7 @@ import Foundation
 
 struct APIConfiguration {
     static let baseURLString = "http://www.giantbomb.com/api"
-    static let defaultParamaters = ["api_key": "<YOUR_API_KEY_HERE>",
+    static let defaultParamaters = ["api_key": "YOUR_API_KEY_HERE",
                                     "format": "json",]
     static let headers = ["X-Custom-Header-1": "Value1",
                           "X-Custom-Header-2": "Value2"]

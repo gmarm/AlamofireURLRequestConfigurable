@@ -8,7 +8,7 @@ A replacement for Alamofire's `URLRequestConvertible` for even cleaner and flexi
 
 ## Wait, but why?
 
-I tried liking `URLRequestConvertible`, I really did! However, I still don't find it particularly clean. Let me explain. This is an example taken [straight from Alamofire](https://github.com/Alamofire/Alamofire#crud--authorization):
+I tried liking `URLRequestConvertible`, I really did! However, I still don't find it particularly clean. Let me explain. This is an example taken [straight from Alamofire's documentation](https://github.com/Alamofire/Alamofire#crud--authorization):
 ```swift
 enum Router: URLRequestConvertible {
     static let baseURLString = "http://example.com"
@@ -68,7 +68,7 @@ enum Router: URLRequestConvertible {
 }
 ```
 
-It's not really easy to understand what's going on here with a quick look, is it? That's because the URL request's configuration is not in a one centralized place, but separated throughout the implementation. This is what the same example looks like when written using `URLRequestConfigurable`:
+It's not really easy to understand what's going on here with a quick look, is it? That's because the URL request's configuration is not in a one centralized place, but scattered throughout the implementation. This is what the same example looks like when written using `URLRequestConfigurable`:
 
 ```swift
 enum Router: URLRequestConfigurable {
@@ -128,7 +128,7 @@ enum Router: URLRequestConfigurable {
 }
 ```
 
-Much more readable, no? With `URLRequestConfigurable`, the URL request's configuration is enforced to be declared in one place and one place only! This results in a consistent look across all our Routers, which in return makes our code more readable and clean!
+Much more readable, right? With `URLRequestConfigurable`, the URL request's configuration is enforced to be declared in one place and one place only! This results in a consistent look across all our Routers, which in return makes our code more readable!
 
 Lets look at [another example from Alamofire](https://github.com/Alamofire/Alamofire#api-parameter-abstraction):
 
@@ -199,7 +199,7 @@ Now it became that much easier adding headers, changing the encoding, or changin
 
 ## Usage
 
-It's as easy as making your routers conform to the `URLRequestConfigurable` protocol. You can then use `Alamofire` normally to perform the requests like before:
+Using `URLRequestConfigurable` is as easy as making your Routers conform to the `URLRequestConfigurable` protocol. You can then use `Alamofire` normally to perform the requests like before:
 
 ```swift
 Alamofire.Manager.sharedInstance.request(Router.Get())
@@ -216,9 +216,9 @@ Alamofire.Manager.sharedInstance.request(Router.Get())
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first. 
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-If the project fails to compile, remove the `API.plist` file and try again. You will need to create your own GiantBomb API key [here](http://www.giantbomb.com/api/) to get results back.
+If you want to get results back from GiantBomb (optional), you will need to create your own GiantBomb API key [here](http://www.giantbomb.com/api/).
 
 ## Requirements
 
