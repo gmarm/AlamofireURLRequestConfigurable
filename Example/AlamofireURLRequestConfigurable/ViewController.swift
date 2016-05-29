@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireURLRequestConfigurable
 
 class ViewController: UIViewController {
+    @IBOutlet private weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        Alamofire.Manager.sharedInstance.request(GameRouter.GetAll())
+        .validate()
+        .responseJSON { response in
+            print(response)
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
-

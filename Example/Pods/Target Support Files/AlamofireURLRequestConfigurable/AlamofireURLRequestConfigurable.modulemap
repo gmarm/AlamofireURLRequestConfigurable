@@ -1,0 +1,6 @@
+framework module AlamofireURLRequestConfigurable {
+  umbrella header "AlamofireURLRequestConfigurable-umbrella.h"
+
+  export *
+  module * { export * }
+}

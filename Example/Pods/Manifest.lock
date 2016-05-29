@@ -1,0 +1,19 @@
+PODS:
+  - Alamofire (3.3.1)
+  - AlamofireURLRequestConfigurable (1.0):
+    - Alamofire (~> 3.0)
+
+DEPENDENCIES:
+  - AlamofireURLRequestConfigurable (from `../`)
+
+EXTERNAL SOURCES:
+  AlamofireURLRequestConfigurable:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  AlamofireURLRequestConfigurable: f490bf97ffc17f30f46a0d476eb00574ac805110
+
+PODFILE CHECKSUM: f2ff97530061c291e300e670d1299c39fdf8d41d
+
+COCOAPODS: 1.0.0
