@@ -216,7 +216,9 @@ Alamofire.Manager.sharedInstance.request(Router.Get())
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first. You will need to create your own GiantBomb API key [here](http://www.giantbomb.com/api/) to get results back.
+To run the example project, clone the repo, and run `pod install` from the Example directory first. 
+
+If the project fails to compile, remove the `API.plist` file and try again. You will need to create your own GiantBomb API key [here](http://www.giantbomb.com/api/) to get results back.
 
 ## Requirements
 
