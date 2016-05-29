@@ -10,7 +10,6 @@
 		140F8F673C69ED296C9AE386 /* Pods_AlamofireURLRequestConfigurable_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A8E6F26895F2A217576529 /* Pods_AlamofireURLRequestConfigurable_Example.framework */; };
 		4B80016F1CF9F97700C7ED3A /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B80016E1CF9F97700C7ED3A /* Game.swift */; };
 		4B8001711CF9FD4000C7ED3A /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8001701CF9FD4000C7ED3A /* APIConfiguration.swift */; };
-		4B8001771CFADD6B00C7ED3A /* API.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B8001761CFADD6B00C7ED3A /* API.plist */; };
 		5143B0CA7C779F8423729CA0 /* Pods_AlamofireURLRequestConfigurable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BB36B9680E1C22A7BD61A5 /* Pods_AlamofireURLRequestConfigurable_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -36,7 +35,6 @@
 		38BB36B9680E1C22A7BD61A5 /* Pods_AlamofireURLRequestConfigurable_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlamofireURLRequestConfigurable_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B80016E1CF9F97700C7ED3A /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		4B8001701CF9FD4000C7ED3A /* APIConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
-		4B8001761CFADD6B00C7ED3A /* API.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API.plist; sourceTree = "<group>"; };
 		4FA5910224F98F7CD54B5BBA /* Pods-AlamofireURLRequestConfigurable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlamofireURLRequestConfigurable_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlamofireURLRequestConfigurable_Tests/Pods-AlamofireURLRequestConfigurable_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5CE016F8B107B08EB6D4EA2D /* Pods-AlamofireURLRequestConfigurable_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlamofireURLRequestConfigurable_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlamofireURLRequestConfigurable_Tests/Pods-AlamofireURLRequestConfigurable_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AlamofireURLRequestConfigurable_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlamofireURLRequestConfigurable_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,7 +113,6 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4B8001761CFADD6B00C7ED3A /* API.plist */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -256,7 +253,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				4B8001771CFADD6B00C7ED3A /* API.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
