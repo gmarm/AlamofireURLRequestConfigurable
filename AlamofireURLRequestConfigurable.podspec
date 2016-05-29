@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'AlamofireURLRequestConfigurable'
   s.version          = '1.0'
-  s.summary          = 'A short description of AlamofireURLRequestConfigurable.'
+  s.summary          = 'URLRequestConfigurable for Alamofire - Even cleaner type safe routing'
   s.description      = <<-DESC
-A replacement for Alamofire's URLRequestConvertible for even cleaner and flexible type safe routing.
+A replacement for Alamofire's URLRequestConvertible protocol for even cleaner type safe routing.
                        DESC
   s.homepage         = 'https://github.com/gmarm/AlamofireURLRequestConfigurable'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
