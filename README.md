@@ -8,208 +8,165 @@ A replacement for Alamofire's `URLRequestConvertible` for even cleaner and flexi
 
 ## Wait, but why?
 
-I tried liking `URLRequestConvertible`, I really did! However, I still don't find it particularly clean. Let me explain. This is an example taken [straight from Alamofire's documentation](https://github.com/Alamofire/Alamofire#crud--authorization):
+This is an example for `URLRequestConvertible` taken [straight from Alamofire's documentation](https://github.com/Alamofire/Alamofire#crud--authorization):
 ```swift
 enum Router: URLRequestConvertible {
-    static let baseURLString = "http://example.com"
-    static var OAuthToken: String?
+    case createUser(parameters: Parameters)
+    case readUser(username: String)
+    case updateUser(username: String, parameters: Parameters)
+    case destroyUser(username: String)
 
-    case CreateUser([String: AnyObject])
-    case ReadUser(String)
-    case UpdateUser(String, [String: AnyObject])
-    case DestroyUser(String)
+    static let baseURLString = "https://example.com"
 
-    var method: Alamofire.Method {
+    var method: HTTPMethod {
         switch self {
-        case .CreateUser:
-            return .POST
-        case .ReadUser:
-            return .GET
-        case .UpdateUser:
-            return .PUT
-        case .DestroyUser:
-            return .DELETE
+        case .createUser:
+            return .post
+        case .readUser:
+            return .get
+        case .updateUser:
+            return .put
+        case .destroyUser:
+            return .delete
         }
     }
 
     var path: String {
         switch self {
-        case .CreateUser:
+        case .createUser:
             return "/users"
-        case .ReadUser(let username):
+        case .readUser(let username):
             return "/users/\(username)"
-        case .UpdateUser(let username, _):
+        case .updateUser(let username, _):
             return "/users/\(username)"
-        case .DestroyUser(let username):
+        case .destroyUser(let username):
             return "/users/\(username)"
         }
     }
 
     // MARK: URLRequestConvertible
 
-    var URLRequest: NSMutableURLRequest {
-        let URL = NSURL(string: Router.baseURLString)!
-        let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
-        mutableURLRequest.HTTPMethod = method.rawValue
+    func asURLRequest() throws -> URLRequest {
+        let url = try Router.baseURLString.asURL()
 
-        if let token = Router.OAuthToken {
-            mutableURLRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        urlRequest.httpMethod = method.rawValue
 
         switch self {
-        case .CreateUser(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .UpdateUser(_, let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .createUser(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .updateUser(_, let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         default:
-            return mutableURLRequest
+            break
         }
-    }
-}
-```
 
-It's not really easy to understand what's going on here with a quick look, is it? That's because the URL request's configuration is not in a one centralized place, but scattered throughout the implementation. This is what the same example looks like when written using `URLRequestConfigurable`:
+        return urlRequest
+    }
+}```
+
+It's not really easy to understand what's going on here with a quick look, is it? That's because the URL request's configuration is scattered throughout the implementation, also leading to multiple `switch` statements. This is what the same example looks like when written using `URLRequestConfigurable`:
 
 ```swift
 enum Router: URLRequestConfigurable {
+    case createUser(parameters: Parameters)
+    case readUser(username: String)
+    case updateUser(username: String, parameters: Parameters)
+    case destroyUser(username: String)
+
     static let baseURLString = "http://example.com"
-    static var OAuthToken: String?
-
-    case CreateUser([String: AnyObject])
-    case ReadUser(String)
-    case UpdateUser(String, [String: AnyObject])
-    case DestroyUser(String)
-
-    static func tokenHeader() -> [String: String]? {
-        if let token = Router.OAuthToken {
-            return ["Authorization": "Bearer \(token)"]
-        }
-        return nil
-    }
 
     // MARK: URLRequestConfigurable
-
-    var configuration: URLRequestConfiguration {
+    var urlRequestConfiguration: URLRequestConfiguration {
         switch self {
-        case .CreateUser(let parameters):
-            return (
-                method: .POST,
-                URLString: "\(Router.baseURLString)/users",
-                parameters: parameters,
-                encoding: .JSON,
-                headers: Router.tokenHeader()
-            )
-        case .ReadUser(let username):
-            return (
-                method: .GET,
-                URLString: "\(Router.baseURLString)/users/\(username)",
-                parameters: nil,
-                encoding: .URL,
-                headers: Router.tokenHeader()
-            )
-        case .UpdateUser(let username, let parameters):
-            return (
-                method: .PUT,
-                URLString: "\(Router.baseURLString)/users/\(username)",
-                parameters: parameters,
-                encoding: .URL,
-                headers: Router.tokenHeader()
-            )
-        case .DestroyUser(let username):
-            return (
-                method: .DELETE,
-                URLString: "\(Router.baseURLString)/users/\(username)",
-                parameters: nil,
-                encoding: .URL,
-                headers: Router.tokenHeader()
-            )
+        case .createUser(let parameters):
+            return URLRequestConfiguration(url: "\(Router.baseURLString)/users",
+                                           method: .post,
+                                           parameters: parameters,
+                                           encoding: URLEncoding.default)
+        case .readUser(let username):
+            return URLRequestConfiguration(url: "\(Router.baseURLString)/users/\(username)",
+                                           method: .get)
+        case .updateUser(let username, let parameters):
+            return URLRequestConfiguration(url: "\(Router.baseURLString)/users/\(username)",
+                                           method: .put,
+                                           parameters: parameters,
+                                           encoding: URLEncoding.default)
+        case .destroyUser(let username):
+            return URLRequestConfiguration(url: "\(Router.baseURLString)/users/\(username)",
+                                           method: .delete)
         }
     }
 }
 ```
 
-Much more readable, right? With `URLRequestConfigurable`, the URL request's configuration is enforced to be declared in one place and one place only! This results in a consistent look across all our Routers, which in return makes our code more readable!
+More structured and readable, right? With `URLRequestConfigurable`, the URL request's configuration is enforced to be declared in one place and one place only. This results in a consistent clean look across all Routers.
 
 Lets look at [another example from Alamofire](https://github.com/Alamofire/Alamofire#api-parameter-abstraction):
 
 ```swift
 enum Router: URLRequestConvertible {
-    static let baseURLString = "http://example.com"
-    static let perPage = 50
+    case search(query: String, page: Int)
 
-    case Search(query: String, page: Int)
+    static let baseURLString = "https://example.com"
+    static let perPage = 50
 
     // MARK: URLRequestConvertible
 
-    var URLRequest: NSMutableURLRequest {
-        let result: (path: String, parameters: [String: AnyObject]) = {
+    func asURLRequest() throws -> URLRequest {
+        let result: (path: String, parameters: Parameters) = {
             switch self {
-            case .Search(let query, let page) where page > 1:
+            case let .search(query, page) where page > 0:
                 return ("/search", ["q": query, "offset": Router.perPage * page])
-            case .Search(let query, _):
+            case let .search(query, _):
                 return ("/search", ["q": query])
             }
         }()
 
-        let URL = NSURL(string: Router.baseURLString)!
-        let URLRequest = NSURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
-        let encoding = Alamofire.ParameterEncoding.URL
+        let url = try Router.baseURLString.asURL()
+        let urlRequest = URLRequest(url: url.appendingPathComponent(result.path))
 
-        return encoding.encode(URLRequest, parameters: result.parameters).0
+        return try URLEncoding.default.encode(urlRequest, with: result.parameters)
     }
 }
 ```
 
-Notice the last 4 lines there. These lines will most likely need to be copy-pasted to many Routers you create. Yikes - that's not nice! And what if you also wanted to add headers?
+And again, look how the example is transformed into something more pleasant to the eye with `URLRequestConfigurable`:
 
-This is the same example using `URLRequestConfigurable`:
 ```swift
 enum Router: URLRequestConfigurable {
+    case Search(query: String, page: Int)
+
     static let baseURLString = "http://example.com"
     static let perPage = 50
 
-    case Search(query: String, page: Int)
-
     // MARK: URLRequestConfigurable
-
-    var configuration: URLRequestConfiguration {
+    var urlRequestConfiguration: URLRequestConfiguration {
         switch self {
         case .Search(let query, let page) where page > 1:
-            return (
-                method: .GET,
-                URLString: "\(Router.baseURLString)/search",
-                parameters: ["q": query, "offset": Router.perPage * page],
-                encoding: .URL,
-                headers: nil
-            )
+            return URLRequestConfiguration(url: "\(Router.baseURLString)/search",
+                                           method: .get,
+                                           parameters: ["q": query, "offset": Router.perPage * page],
+                                           encoding: URLEncoding.default)
         case .Search(let query, _):
-            return (
-                method: .GET,
-                URLString: "\(Router.baseURLString)/search",
-                parameters: ["q": query],
-                encoding: .URL,
-                headers: nil
-            )
+            return URLRequestConfiguration(url: "\(Router.baseURLString)/search",
+                                           method: .get,
+                                           parameters: ["q": query],
+                                           encoding: URLEncoding.default)
         }
     }
 }
 ```
-
-Now it became that much easier adding headers, changing the encoding, or changing the method.
 
 ## Usage
 
 Using `URLRequestConfigurable` is as easy as making your Routers conform to the `URLRequestConfigurable` protocol. You can then use `Alamofire` normally to perform the requests like before:
 
 ```swift
-Alamofire.Manager.sharedInstance.request(Router.Get())
-.validate()
+Alamofire.SessionManager.default.request(Router.get())
 .responseJSON { response in
-    switch response.result {
-    case .Success:
-        print("Validation Successful")
-    case .Failure(let error):
-        print(error)
+    if let JSON = response.result.value {
+        print("JSON: \(JSON)")
     }
 }
 ```
@@ -231,8 +188,14 @@ If you want to get results back from GiantBomb (optional), you will need to crea
 AlamofireURLRequestConfigurable is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+_Swift 3.0_
 ```ruby
-pod 'AlamofireURLRequestConfigurable', '~> 1.0'
+pod 'AlamofireURLRequestConfigurable', '~> 1.1'
+```
+
+_Swift 2.x_
+```ruby
+pod 'AlamofireURLRequestConfigurable', '~> 1.0.0'
 ```
 
 ## Author
