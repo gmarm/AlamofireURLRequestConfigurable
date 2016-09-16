@@ -63,7 +63,8 @@ enum Router: URLRequestConvertible {
 
         return urlRequest
     }
-}```
+}
+```
 
 It's not really easy to understand what's going on here with a quick look, is it? That's because the URL request's configuration is scattered throughout the implementation, also leading to multiple `switch` statements. This is what the same example looks like when written using `URLRequestConfigurable`:
 
