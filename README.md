@@ -102,6 +102,8 @@ enum Router: URLRequestConfigurable {
 
 More structured and readable, right? With `URLRequestConfigurable`, the URL request's configuration is enforced to be declared in one place and one place only. This results in a consistent clean look across all Routers.
 
+Also note that as of version 1.1 all the values but the `url` can be omitted if not needed, reducing the number of lines used even further.
+
 Lets look at [another example from Alamofire](https://github.com/Alamofire/Alamofire#api-parameter-abstraction):
 
 ```swift
@@ -195,7 +197,7 @@ pod 'AlamofireURLRequestConfigurable', '~> 1.1'
 
 _Swift 2.x_
 ```ruby
-pod 'AlamofireURLRequestConfigurable', '~> 1.0.0'
+pod 'AlamofireURLRequestConfigurable', '1.0.1'
 ```
 
 ## Author
