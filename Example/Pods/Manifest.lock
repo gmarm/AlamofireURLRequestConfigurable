@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (3.3.1)
-  - AlamofireURLRequestConfigurable (1.0):
-    - Alamofire (~> 3.0)
+  - Alamofire (4.0.0)
+  - AlamofireURLRequestConfigurable (1.1.0):
+    - Alamofire (~> 4.0)
 
 DEPENDENCIES:
   - AlamofireURLRequestConfigurable (from `../`)
@@ -11,9 +11,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  AlamofireURLRequestConfigurable: f490bf97ffc17f30f46a0d476eb00574ac805110
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  AlamofireURLRequestConfigurable: 42a542231b37bb3c478145f291e87dcec6b8b79b
 
 PODFILE CHECKSUM: f2ff97530061c291e300e670d1299c39fdf8d41d
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.1.0.rc.2

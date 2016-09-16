@@ -11,18 +11,18 @@ import Alamofire
 import AlamofireURLRequestConfigurable
 
 class ViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.Manager.sharedInstance.request(GameRouter.GetAll())
-        .validate()
+        Alamofire.SessionManager.default.request(GameRouter.getAll())
         .responseJSON { response in
-            switch response.result {
-            case .Success:
-                print("Validation Successful")
-            case .Failure(let error):
-                print(error)
+            print(response.request)  // original URL request
+            print(response.response) // HTTP URL response
+            print(response.data)     // server data
+            print(response.result)   // result of response serialization
+            
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
             }
         }
     }
