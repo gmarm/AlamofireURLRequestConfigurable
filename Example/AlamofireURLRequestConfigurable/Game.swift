@@ -15,29 +15,29 @@ struct Game {
 }
 
 enum GameRouter: URLRequestConfigurable {
-    case GetAll()
-    case AddNew(name: String, description: String)
+    case getAll()
+    case addNew(name: String, description: String)
     
     // MARK: URLRequestConfigurable
-    var configuration: URLRequestConfiguration {
+    var urlRequestConfiguration: URLRequestConfiguration {
         switch self {
-        case .GetAll():
-            return (
-                method: .GET,
-                URLString: APIConfiguration.URLString("/games"),
-                parameters: APIConfiguration.parameters(
-                    ["field_list": "id,name",
-                    "limit": 10]
-                ),
-                encoding: .URL,
+        case .getAll():
+            return URLRequestConfiguration(
+                url: APIConfiguration.URLString("/games"),
+                method: .get,
+                parameters: ["field_list": "id,name",
+                             "limit": 10,
+                             "api_key": "<YOUR_API_KEY_HERE>",
+                             "format": "json"],
+                encoding: URLEncoding.queryString,
                 headers: APIConfiguration.headers
             )
-        case .AddNew(let name, let description): // this call does not exist - it's only an example
-            return (
-                method: .POST,
-                URLString: APIConfiguration.URLString("/games/add"),
+        case .addNew(let name, let description): // this call does not exist - it's only an example
+            return URLRequestConfiguration(
+                url: APIConfiguration.URLString("/games/add"),
+                method: .post,
                 parameters: ["name": name, "description": description],
-                encoding: .JSON,
+                encoding: JSONEncoding.default,
                 headers: APIConfiguration.headers
             )
         }

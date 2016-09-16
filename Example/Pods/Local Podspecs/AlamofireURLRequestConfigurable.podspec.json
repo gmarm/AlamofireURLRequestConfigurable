@@ -1,8 +1,8 @@
 {
   "name": "AlamofireURLRequestConfigurable",
-  "version": "1.0",
-  "summary": "A short description of AlamofireURLRequestConfigurable.",
-  "description": "A replacement for Alamofire's URLRequestConvertible for even cleaner and flexible type safe routing.",
+  "version": "1.1.0",
+  "summary": "URLRequestConfigurable for Alamofire - Even cleaner type safe routing",
+  "description": "A replacement for Alamofire's URLRequestConvertible protocol for even cleaner type safe routing.",
   "homepage": "https://github.com/gmarm/AlamofireURLRequestConfigurable",
   "license": {
     "type": "MIT",
@@ -13,16 +13,16 @@
   },
   "source": {
     "git": "https://github.com/gmarm/AlamofireURLRequestConfigurable.git",
-    "tag": "1.0"
+    "tag": "1.1.0"
   },
   "social_media_url": "https://twitter.com/gmarm",
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "AlamofireURLRequestConfigurable/Classes/**/*",
   "dependencies": {
     "Alamofire": [
-      "~> 3.0"
+      "~> 4.0"
     ]
   }
 }

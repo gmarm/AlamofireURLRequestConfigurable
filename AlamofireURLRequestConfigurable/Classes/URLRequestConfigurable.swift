@@ -7,14 +7,28 @@
 
 import Alamofire
 
-public typealias URLRequestConfiguration = (
-    method: Alamofire.Method,
-    URLString: Alamofire.URLStringConvertible,
-    parameters: [String: AnyObject]?,
-    encoding: Alamofire.ParameterEncoding,
-    headers: [String: String]?
-)
+public struct URLRequestConfiguration {
+    let url: Alamofire.URLConvertible
+    let method: Alamofire.HTTPMethod
+    let parameters: Alamofire.Parameters?
+    let encoding: Alamofire.ParameterEncoding
+    let headers: Alamofire.HTTPHeaders?
+    
+    public init(url: Alamofire.URLConvertible,
+                method: Alamofire.HTTPMethod = .get,
+                parameters: Alamofire.Parameters? = nil,
+                encoding: Alamofire.ParameterEncoding = URLEncoding.default,
+                headers: Alamofire.HTTPHeaders? = nil) {
+        self.url = url
+        self.method = method
+        self.parameters = parameters
+        self.encoding = encoding
+        self.headers = headers
+    }
+}
 
+/// Types adopting the `URLRequestConfigurable` protocol can be used to configure URL requests.
 public protocol URLRequestConfigurable {
-    var configuration: URLRequestConfiguration { get }
+    /// The URL request configuration.
+    var urlRequestConfiguration: URLRequestConfiguration { get }
 }
