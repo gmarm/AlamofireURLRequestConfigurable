@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AlamofireURLRequestConfigurable'
-  s.version          = '1.1'
+  s.version          = '1.1.1'
   s.summary          = 'URLRequestConfigurable for Alamofire - Even cleaner type safe routing'
   s.description      = <<-DESC
 A replacement for Alamofire's URLRequestConvertible protocol for even cleaner type safe routing.
@@ -8,9 +8,12 @@ A replacement for Alamofire's URLRequestConvertible protocol for even cleaner ty
   s.homepage         = 'https://github.com/gmarm/AlamofireURLRequestConfigurable'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'George Marmaridis' => 'gmarmas@gmail.com' }
-  s.source           = { :git => 'https://github.com/gmarm/AlamofireURLRequestConfigurable.git', :tag => '1.1' }
+  s.source           = { :git => 'https://github.com/gmarm/AlamofireURLRequestConfigurable.git', :tag => '1.1.1' }
   s.social_media_url = 'https://twitter.com/gmarm'
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.10'
+  s.tvos.deployment_target = '9.0'
+  s.watchos.deployment_target = '2.0'
   s.source_files = 'AlamofireURLRequestConfigurable/Classes/**/*'
   s.dependency 'Alamofire', '~> 4.0'
 end
