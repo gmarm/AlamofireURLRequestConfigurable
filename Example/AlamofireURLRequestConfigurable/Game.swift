@@ -15,13 +15,13 @@ struct Game {
 }
 
 enum GameRouter: URLRequestConfigurable {
-    case getAll()
+    case getAll
     case addNew(name: String, description: String)
     
     // MARK: URLRequestConfigurable
     var urlRequestConfiguration: URLRequestConfiguration {
         switch self {
-        case .getAll():
+        case .getAll:
             return URLRequestConfiguration(
                 url: APIConfiguration.URLString("/games"),
                 method: .get,
