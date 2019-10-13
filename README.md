@@ -8,7 +8,7 @@ A replacement for Alamofire's `URLRequestConvertible` for even cleaner and flexi
 
 ## Wait, but why?
 
-This is an example for `URLRequestConvertible` taken [straight from Alamofire's documentation](https://github.com/Alamofire/Alamofire#crud--authorization):
+This is an example for `URLRequestConvertible` taken [straight from Alamofire's documentation](https://github.com/Alamofire/Alamofire/blob/master/Documentation/AdvancedUsage.md#crud--authorization):
 ```swift
 enum Router: URLRequestConvertible {
     case createUser(parameters: Parameters)
@@ -103,9 +103,9 @@ enum Router: URLRequestConfigurable {
 
 More structured and readable, right? With `URLRequestConfigurable`, the URL request's configuration is enforced to be declared in one place and one place only. This results in a consistent clean look across all Routers.
 
-Also note that as of version 1.1 all the values but the `url` can be omitted if not needed, reducing the number of lines used even further.
+Also note that as of version `1.1` all the values but the `url` can be omitted if not needed, reducing the number of lines used even further.
 
-Lets look at [another example from Alamofire](https://github.com/Alamofire/Alamofire#api-parameter-abstraction):
+Let's look at [another example from Alamofire](https://github.com/Alamofire/Alamofire/blob/master/Documentation/AdvancedUsage.md#api-parameter-abstraction):
 
 ```swift
 enum Router: URLRequestConvertible {
@@ -183,13 +183,18 @@ If you want to get results back from GiantBomb (optional), you will need to crea
 ## Requirements
 
 - [Alamofire](https://github.com/Alamofire/Alamofire)
-- iOS 8.0+ / Mac OS X 10.9+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 7.3+
+- iOS 10.0+ / Mac OS X 10.12+ / tvOS 10.0+ / watchOS 3.0+
+- Xcode 11+
 
 ## Installation
 
 AlamofireURLRequestConfigurable is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
+
+_Swift 5.1_
+```ruby
+pod 'AlamofireURLRequestConfigurable', '~> 1.2'
+```
 
 _Swift 3.0_
 ```ruby
