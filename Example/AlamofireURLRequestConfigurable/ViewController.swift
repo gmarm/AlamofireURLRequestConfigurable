@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.SessionManager.default.request(GameRouter.getAll())
+        Alamofire.SessionManager.default.request(GameRouter.getAll)
         .responseJSON { response in
             print(response.result) // result of response serialization
             
